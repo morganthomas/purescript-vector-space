@@ -37,5 +37,6 @@ class (Group v, Field f) <= VectorSpace v f | v -> f where
 
 infixr 6 scalarMul as *<
 
+-- | Numbers are a vector space over themselves.
 instance numberVectorSpace :: VectorSpace (Additive Number) Number where
   scalarMul x (Additive y) = Additive (x `mul` y)
