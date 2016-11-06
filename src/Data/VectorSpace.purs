@@ -16,6 +16,8 @@ module Data.VectorSpace where
 
 import Data.Group (class Group)
 import Data.Field (class Field)
+import Data.Monoid.Additive (Additive(..))
+import Data.Ring (mul)
 
 -- | A `VectorSpace` v over a field f of "scalars" is a type with an
 -- | addition operation <> which makes v a `Group`, and a scalar multiplication
@@ -34,3 +36,6 @@ class (Group v, Field f) <= VectorSpace v f | v -> f where
   scalarMult :: f -> v -> v
 
 infixr 6 scalarMult as *<
+
+instance numberVectorSpace :: VectorSpace (Additive Number) Number where
+  scalarMult x (Additive y) = Additive (x `mul` y)
