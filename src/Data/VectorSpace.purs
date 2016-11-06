@@ -21,21 +21,21 @@ import Data.Ring (mul)
 
 -- | A `VectorSpace` v over a field f of "scalars" is a type with an
 -- | addition operation <> which makes v a `Group`, and a scalar multiplication
--- | operation `scalarMult` for multiplying a vector by a scalar.
+-- | operation `scalarMul` for multiplying a vector by a scalar.
 -- |
 -- | In addition to the relevant `Group` and `Field` laws, a `VectorSpace` must
 -- | satisfy the following laws:
 -- |
 -- | ```text
--- | x `scalarMult` (y `scalarMult` v) = (x * y) `scalarMult` v
--- | one `scalarMult` v = v
--- | x `scalarMult` (u <> v) = (x `scalarMult` u) <> (x `scalarMult` v)
--- | (x + y) `scalarMult` u = (x `scalarMult` u) <> (y `scalarMult` v)
+-- | x `scalarMul` (y `scalarMul` v) = (x * y) `scalarMul` v
+-- | one `scalarMul` v = v
+-- | x `scalarMul` (u <> v) = (x `scalarMul` u) <> (x `scalarMul` v)
+-- | (x + y) `scalarMul` u = (x `scalarMul` u) <> (y `scalarMul` v)
 -- | ```
 class (Group v, Field f) <= VectorSpace v f | v -> f where
-  scalarMult :: f -> v -> v
+  scalarMul :: f -> v -> v
 
-infixr 6 scalarMult as *<
+infixr 6 scalarMul as *<
 
 instance numberVectorSpace :: VectorSpace (Additive Number) Number where
-  scalarMult x (Additive y) = Additive (x `mul` y)
+  scalarMul x (Additive y) = Additive (x `mul` y)
