@@ -21,16 +21,16 @@ import Data.Ring (mul)
 
 -- | A `VectorSpace` v over a field f of "scalars" is a type with an
 -- | addition operation <> which makes v a `Group`, and a scalar multiplication
--- | operation `scalarMul` for multiplying a vector by a scalar.
+-- | operation `scalarMul` or *< for multiplying a vector by a scalar.
 -- |
 -- | In addition to the relevant `Group` and `Field` laws, a `VectorSpace` must
 -- | satisfy the following laws:
 -- |
 -- | ```text
--- | x `scalarMul` (y `scalarMul` v) = (x * y) `scalarMul` v
--- | one `scalarMul` v = v
--- | x `scalarMul` (u <> v) = (x `scalarMul` u) <> (x `scalarMul` v)
--- | (x + y) `scalarMul` u = (x `scalarMul` u) <> (y `scalarMul` v)
+-- | x *< (y *< v) = (x * y) *< v
+-- | one *< v = v
+-- | x *< (u <> v) = (x *< u) <> (x *< v)
+-- | (x + y) *< u = (x *< u) <> (y *< v)
 -- | ```
 class (Group v, Field f) <= VectorSpace v f | v -> f where
   scalarMul :: f -> v -> v
