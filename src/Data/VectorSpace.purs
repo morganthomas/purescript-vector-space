@@ -14,7 +14,7 @@
 
 module Data.VectorSpace where
 
-import Data.Group (class Group)
+import Data.Group (class CommutativeGroup)
 import Data.Field (class Field)
 import Data.Monoid.Additive (Additive(..))
 import Data.Ring (mul)
@@ -32,7 +32,7 @@ import Data.Ring (mul)
 -- | x *< (u <> v) = (x *< u) <> (x *< v)
 -- | (x + y) *< u = (x *< u) <> (y *< v)
 -- | ```
-class (Group v, Field f) <= VectorSpace v f | v -> f where
+class (CommutativeGroup v, Field f) <= VectorSpace v f | v -> f where
   scalarMul :: f -> v -> v
 
 infixr 6 scalarMul as *<
