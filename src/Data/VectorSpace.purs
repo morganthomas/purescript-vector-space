@@ -44,7 +44,8 @@ infixr 6 scalarMul as *<
 instance numberVectorSpace :: VectorSpace (Additive Number) Number where
   scalarMul x (Additive y) = Additive (x `mul` y)
 
--- | An Applicative applied to a VectorSpace may give you a VectorSpace. You need
--- | to check whether the axioms hold.
+-- | An Applicative applied to a VectorSpace *may* give you a VectorSpace. You need
+-- | to check whether the axioms hold, or at least whether they hold enough for
+-- | your use case.
 instance applyAlgebraVectorSpace :: (Applicative f, VectorSpace v a) => VectorSpace (ApplyAlgebra f v) a where
   scalarMul a = applyAlgebraLift (map (scalarMul a))
