@@ -3,6 +3,10 @@
   "homepage": "https://github.com/morganthomas/purescript-vector-space",
   "description": "Vector spaces for PureScript.",
   "license": "Apache-2.0",
+    "repository": {
+    "type": "git",
+    "url": "git://github.com/morganthomas/purescript-vector-space.git"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
