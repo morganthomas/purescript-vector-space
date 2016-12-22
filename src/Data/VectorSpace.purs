@@ -14,10 +14,13 @@
 
 module Data.VectorSpace where
 
+import Data.Functor (map)
+import Control.Applicative (class Applicative)
 import Data.Group (class CommutativeGroup)
 import Data.Field (class Field)
 import Data.Monoid.Additive (Additive(..))
 import Data.Ring (mul)
+import Data.ApplyAlgebra (ApplyAlgebra, applyAlgebraLift)
 
 -- | A `VectorSpace` v over a field f of "scalars" is a type with an
 -- | addition operation <> which makes v a `Group`, and a scalar multiplication
@@ -40,3 +43,8 @@ infixr 6 scalarMul as *<
 -- | Numbers are a vector space over themselves.
 instance numberVectorSpace :: VectorSpace (Additive Number) Number where
   scalarMul x (Additive y) = Additive (x `mul` y)
+
+-- | An Applicative applied to a VectorSpace may give you a VectorSpace. You need
+-- | to check whether the axioms hold.
+instance applyAlgebraVectorSpace :: (Applicative f, VectorSpace v a) => VectorSpace (ApplyAlgebra f v) a where
+  scalarMul a = applyAlgebraLift (map (scalarMul a))

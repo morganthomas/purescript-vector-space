@@ -9,7 +9,8 @@
   "dependencies": {
     "purescript-group": "^1.0.0",
     "purescript-monoid": "^2.0.0",
-    "purescript-zippable": "^0.1.0"
+    "purescript-zippable": "^0.1.0",
+    "purescript-apply-algebra": "^0.2.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^2.0.0"
