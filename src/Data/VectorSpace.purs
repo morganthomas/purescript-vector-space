@@ -19,7 +19,7 @@ import Control.Applicative (class Applicative)
 import Data.Group (class CommutativeGroup)
 import Data.Field (class Field)
 import Data.Monoid.Additive (Additive(..))
-import Data.Ring (mul)
+import Data.Semiring ((*))
 import Data.ApplyAlgebra (ApplyAlgebra, applyAlgebraLift)
 
 -- | A `VectorSpace` v over a field f of "scalars" is a type with an
@@ -40,9 +40,10 @@ class (CommutativeGroup v, Field f) <= VectorSpace v f | v -> f where
 
 infixr 6 scalarMul as *<
 
--- | Numbers are a vector space over themselves.
-instance numberVectorSpace :: VectorSpace (Additive Number) Number where
-  scalarMul x (Additive y) = Additive (x `mul` y)
+-- | Any `Field` forms a vector space over itself. For some field F, this
+-- | vector space is often written as F^1.
+instance f1VectorSpace :: Field f => VectorSpace (Additive f) f where
+  scalarMul x (Additive y) = Additive (x * y)
 
 -- | An Applicative applied to a VectorSpace *may* give you a VectorSpace. You need
 -- | to check whether the axioms hold, or at least whether they hold enough for
